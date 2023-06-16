@@ -1,10 +1,10 @@
 .App {
   font-family: roboto;
   text-align: center;
+  background-color: #344499;
 }
 
 .toolbar {
   display: flex;
-  padding: 0.5em;
-  background-color: aquamarine;
+  padding: 0.2em;
 }

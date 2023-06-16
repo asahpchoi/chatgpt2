@@ -54,24 +54,37 @@ const ChatbotApp = () => {
 
           return (
             <>
-              <ListItem button key={index} className={"system"}>
+              <ListItem
+                button
+                key={index}
+                style={{
+                  backgroundColor: role === "system" ? "#EEFFEE" : "#FFEEEE",
+                }}
+              >
                 {!json ? (
                   <ListItemText primary={content} />
                 ) : (
                   <ReactJson src={json} />
                 )}
               </ListItem>
-              <Divider />
+              <Divider key={index + "D"} />
             </>
           );
         })}
 
         {gptResponse && (
           <>
-            <ListItem button className="system messageBox ">
+            <ListItem
+              button
+              className="messageBox "
+              key="templist"
+              style={{
+                backgroundColor: "#EEFFEE",
+              }}
+            >
               <ListItemText primary={gptResponse} />
             </ListItem>
-            <Divider />
+            <Divider key="tempD" />
           </>
         )}
       </List>
