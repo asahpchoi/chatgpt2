@@ -123,6 +123,7 @@ const ChatbotApp = () => {
           prompt={prompt}
           setCommands={setCommands}
         />
+        <AudioInput />
       </Paper>
     </Box>
   );
