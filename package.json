@@ -8,8 +8,10 @@
   ],
   "main": "src/index.js",
   "dependencies": {
+    "@chengsokdara/use-whisper": "^0.2.0",
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.10.6",
+    "@ffmpeg/core": "^0.11.0",
     "@fontsource/roboto": "4.5.8",
     "@mui/icons-material": "5.11.16",
     "@mui/material": "5.11.15",

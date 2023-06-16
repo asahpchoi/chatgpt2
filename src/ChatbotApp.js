@@ -13,6 +13,7 @@ import ReactJson from "react-json-view";
 
 import Actions from "./comps/Actions";
 import AudioInput from "./comps/Audio";
+import Audio2 from "./comps/Audio2";
 import ChatAgent from "./comps/ChatAgent";
 
 const ChatbotApp = () => {
@@ -123,7 +124,7 @@ const ChatbotApp = () => {
           prompt={prompt}
           setCommands={setCommands}
         />
-        <AudioInput />
+        <Audio2 setPrompt={setPrompt} />
       </Paper>
     </Box>
   );
