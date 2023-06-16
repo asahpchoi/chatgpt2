@@ -1,8 +1,9 @@
-const apiKey = "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";
+import env from "./env.json";
 
 async function ChatAgent(input, setOutput, memories) {
   memories.push({ role: "user", content: input });
   const messages = memories;
+  const apiKey = env.apiKey;
 
   let data = "";
   try {
@@ -13,13 +14,13 @@ async function ChatAgent(input, setOutput, memories) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo-16k",
         messages,
-        stream: true // For streaming responses
-      })
+        stream: true, // For streaming responses
+      }),
     });
 
     const reader = response.body.getReader();
