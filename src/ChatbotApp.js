@@ -24,6 +24,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import ReactMarkdown from "react-markdown";
 
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
@@ -107,7 +108,7 @@ const ChatbotApp = () => {
                 }}
               >
                 {!json ? (
-                  <ListItemText primary={content} />
+                  <ReactMarkdown>{content}</ReactMarkdown>
                 ) : (
                   <ReactJson src={json} />
                 )}
