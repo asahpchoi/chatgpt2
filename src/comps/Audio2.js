@@ -16,7 +16,7 @@ import Typography from "@mui/material/Typography";
 
 const Audio2 = ({ setPrompt, language }) => {
   const { transcript, recording, startRecording, stopRecording } = useWhisper({
-    apiKey: env.apiKey, // YOUR_OPEN_AI_TOKEN
+    apiKey: env.apiKey1 + env.apiKey2, // YOUR_OPEN_AI_TOKEN
     streaming: true,
     timeSlice: 5000, // 1 second
     removeSilence: true,

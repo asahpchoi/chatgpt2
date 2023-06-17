@@ -127,44 +127,37 @@ const ChatbotApp = () => {
         className="toolbar"
         elevation={3}
       >
-        <div>
-          <TextField
-            multiline
-            rows={1}
-            onChange={(e) => setPrompt(e.target.value)}
-            style={{ width: "70vw" }}
-            value={prompt}
-            label="Ask GPT"
-          />
-          <Audio2 setPrompt={setPrompt} language={language} />
-        </div>
-        <div>
-          <Button
-            onClick={async () => {
-              setLoading(true);
-              setPrompt("");
-              const response = await ChatAgent(
-                prompt,
-                setGptResponse,
-                memories
-              );
-              memories.push({ role: "system", content: response });
-              setMemories(memories);
-              setGptResponse("");
-              setLoading(false);
-            }}
-            variant="outlined"
-            disabled={loading || !prompt}
-          >
-            Send
-          </Button>
+        <TextField
+          multiline
+          rows={1}
+          onChange={(e) => setPrompt(e.target.value)}
+          style={{ width: "70vw" }}
+          value={prompt}
+          label="Ask GPT"
+        />
+        <Audio2 setPrompt={setPrompt} language={language} />
 
-          <Actions
-            disabled={loading || !prompt}
-            prompt={prompt}
-            setCommands={setCommands}
-          />
-        </div>
+        <Button
+          onClick={async () => {
+            setLoading(true);
+            setPrompt("");
+            const response = await ChatAgent(prompt, setGptResponse, memories);
+            memories.push({ role: "system", content: response });
+            setMemories(memories);
+            setGptResponse("");
+            setLoading(false);
+          }}
+          variant="outlined"
+          disabled={loading || !prompt}
+        >
+          Send
+        </Button>
+
+        <Actions
+          disabled={loading || !prompt}
+          prompt={prompt}
+          setCommands={setCommands}
+        />
       </Paper>
     </Box>
   );

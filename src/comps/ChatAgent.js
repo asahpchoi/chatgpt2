@@ -3,7 +3,7 @@ import env from "./env.json";
 async function ChatAgent(input, setOutput, memories) {
   memories.push({ role: "user", content: input });
   const messages = memories;
-  const apiKey = env.apiKey;
+  const apiKey = env.apiKey1 + env.apiKey2;
 
   let data = "";
   try {
