@@ -2,10 +2,17 @@ import { useWhisper } from "@chengsokdara/use-whisper";
 import env from "./env.json";
 import Button from "@mui/material/Button";
 import Backdrop from "@mui/material/Backdrop";
-
+import LinearProgress from "@mui/material/LinearProgress";
 import * as React from "react";
 import Fab from "@mui/material/Fab";
 import MicIcon from "@mui/icons-material/Mic";
+
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import SendIcon from "@mui/icons-material/Send";
+import Typography from "@mui/material/Typography";
 
 const Audio2 = ({ setPrompt, language }) => {
   const { transcript, recording, startRecording, stopRecording } = useWhisper({
@@ -37,16 +44,32 @@ const Audio2 = ({ setPrompt, language }) => {
         open={recording}
         onClick={() => {}}
       >
-        <div>{transcript.text}</div>
-        <Fab
-          variant="outlined"
-          onClick={() => {
-            stopRecording();
-            setPrompt(transcript.text);
-          }}
-        >
-          <MicIcon />
-        </Fab>
+        <Card fullWidth>
+          <CardContent fullWidth>
+            <Typography
+              sx={{ fontSize: 14, width: "100vw", padding: "1em" }}
+              color="text.secondary"
+            >
+              {transcript.text}
+            </Typography>
+          </CardContent>
+          <CardActions
+            style={{ display: "flex", "justify-content": "space-between" }}
+          >
+            <Box sx={{ width: "80%" }}>
+              <LinearProgress color="secondary" />
+            </Box>
+            <Fab
+              variant="outlined"
+              onClick={() => {
+                stopRecording();
+                setPrompt(transcript.text);
+              }}
+            >
+              <SendIcon />
+            </Fab>
+          </CardActions>
+        </Card>
       </Backdrop>
     </>
   );

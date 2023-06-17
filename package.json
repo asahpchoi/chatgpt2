@@ -2,6 +2,7 @@
   "name": "react",
   "version": "1.0.0",
   "description": "React example starter project",
+  "homepage": "https://asahpchoi.github.io/chatgpt2",
   "keywords": [
     "react",
     "starter"
@@ -19,6 +20,7 @@
     "@textea/json-viewer": "^3.0.0",
     "animate.css": "4.1.1",
     "dotenv": "16.0.3",
+    "gh-pages": "^5.0.0",
     "loader-utils": "3.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -35,7 +37,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": [
     ">0.2%",
