@@ -25,24 +25,33 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
-const Topbar = ({ language, setLanguage }) => {
-  const handleChange = (event) => {
-    setLanguage(event.target.value);
-  };
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import RestoreIcon from "@mui/icons-material/Restore";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
+const Topbar = ({ language, setLanguage }) => {
   return (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Chat
         </Typography>
-
-        <RadioGroup value={language} onChange={handleChange} row>
-          <FormControlLabel value="en" control={<Radio />} label="English" />
-          <FormControlLabel value="zh" control={<Radio />} label="Chinese" />
-        </RadioGroup>
       </Toolbar>
     </AppBar>
+  );
+};
+
+const LangSelector = ({ language, setLanguage }) => {
+  const handleChange = (event) => {
+    setLanguage(event.target.value);
+  };
+  return (
+    <RadioGroup value={language} onChange={handleChange} row>
+      <FormControlLabel value="en" control={<Radio />} label="English" />
+      <FormControlLabel value="zh" control={<Radio />} label="Chinese" />
+    </RadioGroup>
   );
 };
 
@@ -57,7 +66,7 @@ const ChatbotApp = () => {
     console.log({ userPrompt, systemPrompt });
     setLoading(true);
     setPrompt("");
-    memories.push({ role: "system", content: systemPrompt });
+    memories.push({ role: "assistant", content: systemPrompt });
     const response = await ChatAgent(userPrompt, setGptResponse, memories);
     memories.push({ role: "system", content: response });
     setMemories(memories);
@@ -70,13 +79,13 @@ const ChatbotApp = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        overflowY: "scroll",
+        overflowY: "none",
         overflowX: "none",
       }}
     >
       <Topbar language={language} setLanguage={setLanguage} />
       <CssBaseline />
-      <List style={{ height: "85vh", overflow: "none" }}>
+      <List style={{ height: "75vh", overflow: "scroll" }}>
         {memories.map(({ role, content }, index) => {
           let json = null;
           try {
@@ -90,6 +99,9 @@ const ChatbotApp = () => {
               <ListItem
                 button
                 key={index}
+                onClick={() => {
+                  navigator.clipboard.writeText(content);
+                }}
                 style={{
                   backgroundColor: role === "system" ? "#EEFFEE" : "#FFEEEE",
                 }}
@@ -121,44 +133,57 @@ const ChatbotApp = () => {
           </>
         )}
       </List>
-
-      <Paper
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-        className="toolbar"
-        elevation={3}
+      <BottomNavigation
+        showLabels
+        style={{ display: "flex", flexDirection: "column", height: "15vh" }}
       >
-        <TextField
-          multiline
-          rows={1}
-          onChange={(e) => setPrompt(e.target.value)}
-          style={{ width: "70vw" }}
-          value={prompt}
-          label="Ask GPT"
-        />
-        <Audio2 setPrompt={setPrompt} language={language} />
-
-        <Button
-          onClick={async () => {
-            setLoading(true);
-            setPrompt("");
-            const response = await ChatAgent(prompt, setGptResponse, memories);
-            memories.push({ role: "system", content: response });
-            setMemories(memories);
-            setGptResponse("");
-            setLoading(false);
+        <div>
+          <TextField
+            multiline
+            rows={1}
+            onChange={(e) => setPrompt(e.target.value)}
+            fullWidth
+            value={prompt}
+            label="Ask GPT"
+          />
+        </div>
+        <div
+          fullWidth
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            padding: "0.5em",
           }}
-          variant="outlined"
-          disabled={loading || !prompt}
         >
-          Send
-        </Button>
+          <Button
+            onClick={async () => {
+              setLoading(true);
+              setPrompt("");
+              const response = await ChatAgent(
+                prompt,
+                setGptResponse,
+                memories
+              );
+              memories.push({ role: "system", content: response });
+              setMemories(memories);
+              setGptResponse("");
+              setLoading(false);
+            }}
+            variant="outlined"
+            disabled={loading || !prompt}
+          >
+            Send
+          </Button>
 
-        <Actions
-          disabled={loading || !prompt}
-          prompt={prompt}
-          setCommands={setCommands}
-        />
-      </Paper>
+          <Actions
+            disabled={loading || !prompt}
+            prompt={prompt}
+            setCommands={setCommands}
+          />
+          <LangSelector language={language} setLanguage={setLanguage} />
+          <Audio2 setPrompt={setPrompt} language={language} />
+        </div>
+      </BottomNavigation>
     </Box>
   );
 };
