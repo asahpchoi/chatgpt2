@@ -7,4 +7,5 @@
 .toolbar {
   display: flex;
   padding: 0.2em;
+  justify-content: space-between;
 }

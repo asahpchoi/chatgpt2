@@ -2,17 +2,16 @@ import { useWhisper } from "@chengsokdara/use-whisper";
 import env from "./env.json";
 import Button from "@mui/material/Button";
 import Backdrop from "@mui/material/Backdrop";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import * as React from "react";
 
-const Audio2 = ({ setPrompt }) => {
-  const [language, setLanguage] = React.useState("en");
+import * as React from "react";
+import Fab from "@mui/material/Fab";
+import MicIcon from "@mui/icons-material/Mic";
+
+const Audio2 = ({ setPrompt, language }) => {
   const { transcript, recording, startRecording, stopRecording } = useWhisper({
     apiKey: env.apiKey, // YOUR_OPEN_AI_TOKEN
     streaming: true,
-    timeSlice: 1000, // 1 second
+    timeSlice: 5000, // 1 second
     removeSilence: true,
     whisperConfig: {
       language,
@@ -21,14 +20,13 @@ const Audio2 = ({ setPrompt }) => {
 
   return (
     <>
-      <Button
-        variant="outlined"
+      <Fab
         onClick={() => {
           startRecording();
         }}
       >
-        Audio
-      </Button>
+        <MicIcon />
+      </Fab>
 
       <Backdrop
         sx={{
@@ -39,16 +37,16 @@ const Audio2 = ({ setPrompt }) => {
         open={recording}
         onClick={() => {}}
       >
-        {transcript.text}
-        <Button
+        <div>{transcript.text}</div>
+        <Fab
           variant="outlined"
           onClick={() => {
             stopRecording();
             setPrompt(transcript.text);
           }}
         >
-          DONE
-        </Button>
+          <MicIcon />
+        </Fab>
       </Backdrop>
     </>
   );

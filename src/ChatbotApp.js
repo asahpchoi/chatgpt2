@@ -10,17 +10,48 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import ReactJson from "react-json-view";
-
+import Fab from "@mui/material/Fab";
 import Actions from "./comps/Actions";
 import AudioInput from "./comps/Audio";
 import Audio2 from "./comps/Audio2";
 import ChatAgent from "./comps/ChatAgent";
+import AppBar from "@mui/material/AppBar";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+
+const Topbar = ({ language, setLanguage }) => {
+  const handleChange = (event) => {
+    setLanguage(event.target.value);
+  };
+
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Chat
+        </Typography>
+
+        <RadioGroup value={language} onChange={handleChange} row>
+          <FormControlLabel value="en" control={<Radio />} label="English" />
+          <FormControlLabel value="zh" control={<Radio />} label="Chinese" />
+        </RadioGroup>
+      </Toolbar>
+    </AppBar>
+  );
+};
 
 const ChatbotApp = () => {
   const [prompt, setPrompt] = useState("");
   const [gptResponse, setGptResponse] = useState("");
   const [memories, setMemories] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [language, setLanguage] = useState("en");
 
   async function setCommands(userPrompt, systemPrompt) {
     console.log({ userPrompt, systemPrompt });
@@ -43,6 +74,7 @@ const ChatbotApp = () => {
         overflowX: "none",
       }}
     >
+      <Topbar language={language} setLanguage={setLanguage} />
       <CssBaseline />
       <List style={{ height: "85vh", overflow: "none" }}>
         {memories.map(({ role, content }, index) => {
@@ -99,10 +131,11 @@ const ChatbotApp = () => {
           multiline
           rows={1}
           onChange={(e) => setPrompt(e.target.value)}
-          fullWidth
+          style={{ width: "70vw" }}
           value={prompt}
           label="Ask GPT"
         />
+        <Audio2 setPrompt={setPrompt} language={language} />
         <Button
           onClick={async () => {
             setLoading(true);
@@ -124,7 +157,6 @@ const ChatbotApp = () => {
           prompt={prompt}
           setCommands={setCommands}
         />
-        <Audio2 setPrompt={setPrompt} />
       </Paper>
     </Box>
   );

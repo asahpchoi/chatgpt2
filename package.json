@@ -13,7 +13,7 @@
     "@emotion/styled": "11.10.6",
     "@ffmpeg/core": "^0.11.0",
     "@fontsource/roboto": "4.5.8",
-    "@mui/icons-material": "5.11.16",
+    "@mui/icons-material": "^5.11.16",
     "@mui/material": "5.11.15",
     "@notionhq/client": "^2.2.5",
     "@textea/json-viewer": "^3.0.0",
