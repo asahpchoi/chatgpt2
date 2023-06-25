@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/chatgpt2/static/css/main.866992ec.css",
-    "main.js": "/chatgpt2/static/js/main.806147e2.js",
+    "main.js": "/chatgpt2/static/js/main.2ec1e1ce.js",
     "static/js/531.c682c2b0.chunk.js": "/chatgpt2/static/js/531.c682c2b0.chunk.js",
     "static/js/586.aac0e6ce.chunk.js": "/chatgpt2/static/js/586.aac0e6ce.chunk.js",
     "static/js/193.59f44da2.chunk.js": "/chatgpt2/static/js/193.59f44da2.chunk.js",
@@ -41,7 +41,7 @@
     "static/media/roboto-greek-ext-700-normal.woff2": "/chatgpt2/static/media/roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2",
     "index.html": "/chatgpt2/index.html",
     "main.866992ec.css.map": "/chatgpt2/static/css/main.866992ec.css.map",
-    "main.806147e2.js.map": "/chatgpt2/static/js/main.806147e2.js.map",
+    "main.2ec1e1ce.js.map": "/chatgpt2/static/js/main.2ec1e1ce.js.map",
     "531.c682c2b0.chunk.js.map": "/chatgpt2/static/js/531.c682c2b0.chunk.js.map",
     "586.aac0e6ce.chunk.js.map": "/chatgpt2/static/js/586.aac0e6ce.chunk.js.map",
     "193.59f44da2.chunk.js.map": "/chatgpt2/static/js/193.59f44da2.chunk.js.map",
@@ -50,6 +50,6 @@
   },
   "entrypoints": [
     "static/css/main.866992ec.css",
-    "static/js/main.806147e2.js"
+    "static/js/main.2ec1e1ce.js"
   ]
 }
