@@ -5,6 +5,8 @@ async function ChatAgent(input, setOutput, memories) {
   const messages = memories;
   const apiKey = env.apiKey1 + env.apiKey2;
 
+  console.log({ apiKey });
+
   let data = "";
   try {
     const API_URL = "https://api.openai.com/v1/chat/completions";
